@@ -1,0 +1,564 @@
+/* CONFIGURACIÓN BÁSICA WEB */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul, li, a{
+    text-decoration: none;
+    list-style-type: none;
+}
+@font-face {
+    font-family: montserrat;
+    src: url(../fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+body{
+    font-family: 'montserrat','Open Sans';
+    padding-top:60px;
+}
+
+:root{
+    --colorprincipal: green;
+    --colorsecundario: lightgray;
+    --colortitulo: white;
+    --titulosize: clamp(1.5rem, 3.5vw, 3rem);
+    --textosize: clamp(.7rem, 2.5vw, 1rem)
+}
+
+/* CABECERA TOP */
+
+.header-nav-app{
+    position: fixed;
+    top: 0; 
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    background-color: var(--colorprincipal); 
+    transition: all ease-in-out .3s;
+    z-index: 1;
+}
+.header-nav-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+    .header-nav-app .header-logo{
+        font-size: 30px;
+        width: 60px;
+        color: var(--colortitulo);
+        text-transform: uppercase;
+        font-weight: 900;
+        margin: 0;
+        padding: 0 10px;
+    }
+    .header-nav-buttons .header-search{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        color: var(--colortitulo);
+        font-size: 15px;
+        padding: 5px;
+    }
+        .header-nav-buttons .header-search i{
+            padding:3px;
+            color: white;
+        }
+        .header-nav-buttons .header-search input{
+            width: 60%;
+        }
+            .header-nav-buttons .header-search input:focus{
+                outline: none;
+            }
+    .header-nav-buttons .header-upload a{
+        font-size: 20px;
+        color: var(--colortitulo);
+        padding: 10px;
+    }
+
+    /* Cabecera se encoge/ensancha */
+
+.reduced{
+    height: 0px;
+    transition: all ease-in-out .3s;  
+}
+    .reduced .header-logo{
+        display: none;
+    }
+    .reduced .header-nav-buttons{
+        display: none;
+    }
+
+/* NAVEGADOR ALTAS RESOLUCIONES     */
+.header-nav-app-laptop{
+    background-color: var(--colorprincipal);
+    text-transform: uppercase;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+}
+    .header-logo{
+        display: flex;
+        height: 100%;
+        flex-grow: 1;
+    }
+        .header-logo li a{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 40px;
+            color: var(--colortitulo);
+            text-transform: uppercase;
+            font-weight: 900;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+    .menu-buttons-laptop{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        flex-grow: 1;
+        height: 60px;
+    }
+    .menu-buttons-laptop li{
+        width: 130px;
+        height: 100%;
+        border-left: 3px solid white;
+    }    
+    
+        .menu-buttons-laptop .element-button-laptop a{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            color: var(--colortitulo);
+            font-size: 14px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all .2s linear;
+        }
+        .menu-buttons-laptop .element-button-laptop a i{
+            font-size: 0px;
+            transition: all .2s linear;
+        }
+
+/* Hover elementos buttons */
+
+.menu-buttons-laptop .element-button-laptop a:hover{
+    height: calc(100% + 10px);
+    background-color: var(--colorprincipal);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0px 0px 10px 4px white;
+    transform: scale(1.02);
+    animation: bounceAnimation 1.3s ease;
+}
+    .menu-buttons-laptop .element-button-laptop:hover i{
+        display: block;
+        font-size: 22px;
+        padding-bottom: 5px;
+    }
+
+     /* buscador menu laptop    */
+    .menu-buttons-laptop .header-search-laptop{
+        display: flex;
+        align-items: center;
+        transition: all .2s linear;
+        width: 50px
+    }
+    .menu-buttons-laptop .header-search-laptop  a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+        .menu-buttons-laptop .header-search-laptop  a i{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: var(--colortitulo);
+            text-align: center;
+            width: 100%;
+            height: 100%;
+        }
+        .menu-buttons-laptop .header-search-laptop input{
+            font-size: 16px;
+            width: 0px;
+            height: 22px;
+            border: none;
+            transition: all .2s linear;   
+        }
+
+        /* hover busqueda */
+        .menu-buttons-laptop .header-search-laptop:hover i{
+            animation: bounceAnimation 2s infinite;
+        }
+            @keyframes bounceAnimation{
+            0%   { transform: scale(1,1)    translateY(0); }
+            10%  { transform: scale(1.1,.9) translateY(0); }
+            30%  { transform: scale(.9,1.1) translateY(-5px); }
+            50%  { transform: scale(1,1)    translateY(0); }
+            100% { transform: scale(1,1)    translateY(0); }
+            }      
+       
+        .search-li-animation {
+            width: 250px !important;
+        }
+        .search-li-animation input{
+            width: 200px !important;
+            margin-right: 10px;
+            padding:2px
+        }
+            .search-li-animation input:focus{
+                outline: none;
+            } 
+
+    /* NAVEGADOR BOTTOM */
+
+.menu-principal{
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 7px solid var(--colortitulo);
+    box-shadow: 0px 0px 6px 0 white;
+}
+    .menu-principal .menu-elements{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        background-color: var(--colorprincipal);
+        justify-content: space-around;
+        align-items: center;
+        
+    }
+    .menu-principal .menu-elements li{
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+         
+    }
+    .menu-principal .menu-elements li a{
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: var(--colortitulo);
+        position: relative;
+        transition: all .2s ease-in-out; 
+        
+    }
+    .menu-principal .menu-elements li a p{
+        position: absolute;
+        bottom: 7px;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+        .menu-principal .menu-elements li a i{
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: var(--colortitulo);
+            width: 50px;
+            height: 50px;
+            border: 5px solid transparent;
+            transition: all .2s ease-in-out;  
+        }
+        .menu-principal .menu-elements li a:hover::before{  
+            content: "";
+            position: absolute;
+            background-color: transparent;
+            border-top-right-radius: 100%;
+            width: 25px;
+            height: 20px;
+            top: 2px;
+            left:7px;
+            box-shadow: 0 -6px 0 0 var(--colortitulo);  
+        }
+        .menu-principal .menu-elements li a:hover::after{
+            content: "";
+            position: absolute;
+            background-color: transparent;
+            border-top-left-radius: 100%;
+            width: 25px;
+            height: 20px;
+            top: 2px;
+            right:7px;
+            box-shadow: 0 -6px 0 0 var(--colortitulo); 
+        }
+
+/* NAVEGADOR HOVER */
+
+.menu-principal .menu-elements li a:hover i{
+    transform: translateY(-25px);
+    background-color: var(--colorprincipal);
+    border: 4px solid var(--colortitulo);
+    border-radius: 100%;
+    box-shadow: 0px -1px 6px 0 var(--colortitulo);
+}
+    .menu-principal .menu-elements li a:hover p{
+        display: block;
+        font-size: 13px;
+    }
+
+    /*Ajuste de los menus en altas-bajas resoluciones  */
+    @media screen and (max-width:1080px){
+        .header-nav-app-laptop{
+            display: none;
+        }
+        .header-nav-app{
+            display: flex;
+        }
+        .menu-principal{
+            display: flex;
+        }
+        body{
+            padding-top: 40px;
+            padding-bottom: 50px;
+        }  
+    }  
+
+/* CARRUSEL     */
+
+.header-carrusel-app{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+    .carrusel-images-galery{
+        position: relative;
+        height:400px;
+        width: inherit;
+    }
+        .carrusel-image{
+            display: flex;
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            opacity: 0;  
+        }
+            .carruselmostrado{
+                opacity: 1;
+            }
+            .carrusel-image img{
+                width: 100%;
+                height: inherit;
+                object-fit: cover;
+            }
+        .carrusel-image .carrusel-description{
+            display: flex;
+            position: absolute;
+            width: 70%;
+            height: 80px;
+            top:50%;
+            left: 50%;
+            transform: translate( -50% , -50%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            background-color: rgba(150, 150, 150, .6);
+            color: var(--colortitulo);
+            backdrop-filter: blur(1px);   
+        }
+/* Botones avance/retroceso carrusel  */
+
+.carrusel-button{
+    width: 30px;
+    margin:0 30px;
+    font-size: 35px;
+    text-align: center;
+    color: var(--colorsecundario);
+    opacity: 1;
+}  
+    .header-carrusel-app .carrusel-prev{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;     
+    }
+    .header-carrusel-app .carrusel-next{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+    }
+
+ /* Indicador de posicion */
+
+.div-carrusel-position{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:5px;
+    margin: 5px;
+    height: 15px;
+}
+.carrusel-position{
+    font-size: 10px;
+    color: var(--colorsecundario);
+    transition: all ease-in-out .2s;
+}
+
+    .posicionado{
+        color: var(--colorprincipal);
+        font-size: 12px;
+        transition: all ease-in-out .2s;
+    }
+
+    @media screen and (max-width:1080px){  
+        .carrusel-images-galery{
+            height: 250px;
+        }
+        .header-carrusel-app .carrusel-button{
+            font-size: 22px;
+            margin: 0 10px;
+        }
+    }
+
+
+/* texto */
+
+.carrusel-txt{
+    font-size: 18px;
+    text-align: justify;
+    padding: 10px;
+}
+
+/* CATALOGO ARBOLES  */
+.catalogo-especies-section{
+    user-select: none;
+}
+
+.catalogo-especies-section h2{
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: var(--titulosize); 
+
+}
+
+.catalogo-arboles-app{
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3 , minmax(100px,300px));
+    grid-template-rows: repeat(3, minmax(100px,300px));
+    justify-content: center;
+    max-width: 90%;
+}
+
+@media screen and (max-width:1080px){
+    .catalogo-arboles-app{
+        grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3,150px);
+    }
+}
+@media screen and (max-width:450px){
+    .catalogo-arboles-app{
+        grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3,100px);
+    }
+}
+
+/* Tarjeta de los arboles individual */
+.arboles-card{
+    background-color: transparent;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    overflow: hidden;
+}
+.arboles-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+     .arboles-front, .arboles-back{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden; 
+    }
+    .arboles-front  img, .arboles-back img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;    
+    }
+        .arboles-back{
+            transform: rotateY(180deg);
+        }
+
+/* ANIMACIONES   */
+
+/* Tarjeta deslizamiento vertical */
+
+.verticalMovement .arboles-inner{
+    transform: translateY(-100%);
+}
+.animation-vertical .arboles-inner .arboles-back{
+    transform: translateY(100%);
+}  
+
+/* Tarjeta deslizamiento horizontal */
+
+.horizontalMovement .arboles-inner{
+    transform: translateX(-100%);
+}
+.animation-horizontal .arboles-inner .arboles-back{
+    transform: translateX(100%);
+}
+
+/* Tarjeta flip horizontal */
+
+.horizontalFlip .arboles-inner{
+    transform: rotateY(180deg);
+}
+.animation-flip .arboles-inner .arboles-back{
+    transform: rotateY(180deg);
+}
+
+/* Tarjeta flip vertical */
+.verticalFlip .arboles-inner{
+    transform: rotateX(180deg);
+}
+.animation-flip-vertical .arboles-inner .arboles-back{
+    transform: rotateX(180deg);
+}
