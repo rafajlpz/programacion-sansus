@@ -1,8 +1,9 @@
 <template>
+<!-- Datos de la planta -->
     <fieldset class="card p-3 mb-3">
         <legend>Nombre de la planta</legend>
-        <ul class="fields row g-2">
-            <li class="field col-auto">
+        <ul class="fields row g-2 mb-3">
+            <li class="field col">
                 <label class="form-label required" for="especie">
                     Nombre científico
                     <span data-set="Campo obligatorio" class="text-danger">*</span>
@@ -28,7 +29,7 @@
                 </select>
                 <the-loader :loading="loaderSpecies" sizecircle="1em" foreground="lightgreen"></the-loader>
             </li>
-            <li class="field col-auto">
+            <li class="field col">
                 <label class="form-label" for="nombrecomun">Nombre común</label>
                 <input
                     placeholder="Su nombre aquí"
@@ -41,6 +42,8 @@
                     id="nombrecomun"
                 />
             </li>
+        </ul>
+        <ul class="fields row g-2 mb-3">
             <li class="field col">
                 <label class="form-label required" for="nombrearbol">
                     Nombre de referencia
@@ -56,13 +59,57 @@
                     id="nombrearbol"
                 />
             </li>
+            <li class="field col">
+                <label class="form-label" for="edadarbol">Edad estimada</label>
+                <input
+                    class="form-control"
+                    placeholder="edad estimada"
+                    type="number"
+                    v-model.number="form.edadEstimada"
+                    name="edadarbol"
+                    id="edadarbol"
+                />
+            </li>
+            <li class="field col-auto">
+                <label class="form-label" for="alturarbol">Altura estimada en cm</label>
+                <input
+                    class="form-control"
+                    placeholder="altura estimada en cm"
+                    type="number"
+                    v-model.number="form.alturaEstimada"
+                    name="alturarbol"
+                    id="alturaarbol"
+                />
+            </li>
+        </ul>
+        <ul class="fields g-2 row">
+            <li class="field col-auto">
+                <input
+                    type="checkbox"
+                    v-model="form.arbolCaducifolia"
+                    name="arbolCaduco"
+                    id="arbolCaduco"
+                />&nbsp;
+                <label class="form-label required" for="arbolCaduco">
+                    Caducifolia
+                </label>
+                <input
+                    type="checkbox"
+                    v-model="form.arbolPerenne"
+                    name="arbolPerenne"
+                    id="arbolPerenne"
+                />&nbsp;
+                <label class="form-label required" for="arbolPerenne">
+                    Perenne
+                </label>
+            </li>
         </ul>
     </fieldset>
 </template>
 
 <script setup>
 //Dependencias
-import { defineProps,onMounted,computed,inject } from 'vue';
+import { defineProps, onMounted, computed, inject } from 'vue';
 import { useStore } from 'vuex';
 import TheLoader from '../../TheLoader.vue';
 //Carga del store

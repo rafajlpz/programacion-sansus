@@ -17,9 +17,11 @@
             </ul>
         </nav>
     </header>
+   
 </template>
 
 <script setup>
+
 import TheSearch from '@/components/senlleira-components/TheSearch.vue';
 </script>
 

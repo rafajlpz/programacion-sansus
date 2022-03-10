@@ -5,33 +5,49 @@
 <template>
     <div class="p-3">
         <template v-if="senlleira">
-            <header>
-                <h1 class="main-title">{{ senlleira.genus }} {{ senlleira.specie }}</h1>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Datos técnicos</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ senlleira.nombreReferencia }}</h6>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <em>Latitud:</em>
-                                {{ senlleira.location.latitude }}
-                            </li>
-                            <li class="list-group-item">
-                                <em>Longitud:</em>
-                                {{ senlleira.location.longitude }}
-                            </li>
-                            <li class="list-group-item">{{ senlleira.lugar }}</li>
-                        </ul>
-                        <p class="card-text">{{ senlleira.comentarios }}</p>
-                        <a href="#" class="card-link">Card link</a>
+                <h2 class="ficha-tittle">Ficha del arbol</h2>
+                <!-- ficha tecnica -->
+                <table class="ficha-tecnica-table">
+                    <tr>
+                        <th>Nombre del árbol:</th>
+                        <td>{{ senlleira.nombreComun }}</td>
+                    </tr>
+                    <tr>
+                        <th>Especie:</th>
+                        <td>{{ senlleira.genus }} {{ senlleira.specie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tipo de hoja:</th>
+                        <td>Desconocida</td>
+                    </tr>
+                    <tr>
+                        <th>Ubicación:</th>
+                        <td>{{ senlleira.lugar }}</td>
+                    </tr>
+                    <tr>
+                        <th>Edad estimada:</th>
+                        <td>Desconocida</td>
+                    </tr>
+                    <tr>
+                        <th>Altura estimada:</th>
+                        <td>Desconocida</td>
+                    </tr>
+                </table>
+                <images-senlleiras :id="$route.params.id"></images-senlleiras>
+                        </template>
                     </div>
-                </div>
-                <h2 class="secondary-title">{{ senlleira.nombreComun }}</h2>
-                {{ senlleira.nombreReferenica }}
-            </header>
-            <images-senlleiras :id="$route.params.id"></images-senlleiras>
-        </template>
-    </div>
+                    <table class="ficha-tecnica-table-description">
+                        <tr>
+                <th colspan="2">Historias leyendas y curiosidades</th>
+                        </tr>
+                <tr>
+                    <td colspan="2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto rem voluptate ipsum dignissimos sit doloribus alias, distinctio voluptatem, quaerat, debitis aliquam. Ullam animi suscipit ea atque aliquid vero, quaerat quas esse consequuntur sit ipsum dolorum et optio! Laboriosam accusamus culpa eos, sequi id sed quas neque dignissimos, dolores iure dolorem maiores sapiente? Esse non magnam quibusdam a aliquam eum unde. Sed ab adipisci, minus fugit provident delectus aut est temporibus numquam accusamus inventore totam optio. Numquam itaque assumenda tempora voluptates doloribus ducimus, eveniet perferendis eos adipisci doloremque libero totam rerum odio aut aperiam eius asperiores sequi nihil tenetur! Consequatur, accusamus!</td>
+                </tr>
+                <tr>
+                <td class="table-usuario" colspan="2">Ficha subida por: <span id="name-user">Manuel Rivas</span></td>
+                        </tr>
+                    </table>
+                    <iframe class="mapa-arbore" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.4105678315673!2d-8.519189784223519!3d42.885283709762156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2effba9a8d6f4d%3A0xac240e9b947de9ac!2sCERSIA%20Empresa!5e0!3m2!1ses!2ses!4v1646815173635!5m2!1ses!2ses" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>       
 </template>
 
 <script setup>
@@ -62,64 +78,6 @@ const senlleira = computed(() => {
 provide('senlleira', senlleira);
 </script>
 
-<style scoped>
-.card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
-}
-.card-body {
-    flex: 1 1 auto;
-    padding: 1rem 1rem;
-}
-.card-title {
-    margin-bottom: 0.5rem;
-}
-
-.card-subtitle {
-    margin-top: -0.25rem;
-    margin-bottom: 0;
-}
-
-.card h6 {
-    font-size: 1rem;
-}
-
-.card h5 {
-    font-size: 1.25rem;
-}
-
-.card h5,
-.card h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    line-height: 1.2;
-}
-.card p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-.list-group-item:first-child {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-}
-.list-group-item {
-    position: relative;
-    display: block;
-    padding: 0.5rem 1rem;
-    color: #212529;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-}
+<style scoped lang="scss">
+@import url(../../assets/scss/mostrar.scss);
 </style>

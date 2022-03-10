@@ -16,7 +16,15 @@ const SENLLEIRA = {
     apellidos: '',
     comentarios: '',
     email: 'store/senlleira@prueba.com',
-    confirmado: false
+    confirmado: false,
+    edadEstimada: 0,
+    alturaEstimada: 0.0,
+    arbolCaducifolia: false,
+    arbolPerenne: false,
+    antigüedadArbol: false,
+    tamañoArbol: false,
+    situacionArbol: false,
+    contextoHistorico: false
 }
 
 

@@ -32,6 +32,10 @@ const routes = [
     name: 'Mapas',
     component: () => import('../views/Mapas.vue')
   },
+  {path: '/menuweb',
+    name: 'MenuWeb',
+    component: () => import(/* webpackChunkName: "about" */ '../views/menu-top-web/Menuweb.vue')
+  },
   {
     path: '/about',
     name: 'About',

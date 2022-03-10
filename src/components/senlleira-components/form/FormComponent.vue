@@ -62,6 +62,48 @@
                 </li>
             </ul>
         </fieldset>
+        <!-- motivacion -->
+        <fieldset class="card p-3 mb-3">
+            <legend>Motivo por la elección del árbol</legend>
+            <ul class="fields g-2 row">
+                 <li class="field col">
+                    <input 
+                         type="checkbox" 
+                         v-model="form.antigüedadArbol"
+                         name="antigüedad" 
+                         id="antigüedad" 
+                    />
+                    <label class="form-label" for="antigüedad">Antigüedad</label> 
+                </li> 
+                 <li class="field col">
+                    <input 
+                         type="checkbox" 
+                         v-model="form.tamañoArbol"
+                         name="tamañoArbol" 
+                         id="tamañoArbol" 
+                    />
+                    <label class="form-label" for="tamañoArbol">Tamaño del árbol</label> 
+                </li>
+                 <li class="field col">
+                    <input 
+                         type="checkbox" 
+                         v-model="form.situacionArbol"
+                         name="situacionArbol" 
+                         id="situacionArbol" 
+                    />
+                    <label class="form-label" for="situacionArbol">Situación del árbol</label> 
+                </li>
+                 <li class="field col">
+                    <input 
+                         type="checkbox" 
+                         v-model="form.contextoHistorico"
+                         name="contextoHistorico" 
+                         id="contextoHistorico" 
+                    />
+                    <label class="form-label" for="contextoHistorico">Contexto histórico</label> 
+                </li>
+            </ul>
+        </fieldset>
         <fieldset class="card p-3 mb-3">
             <legend>Datos personales</legend>
             <div class="input-group mb-3">
