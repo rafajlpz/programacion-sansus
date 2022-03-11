@@ -20,14 +20,14 @@ const currPos = computed(() => ({
 
 const loader = new Loader({ apiKey: GOOGLE_MAPS_API_KEY });
 const mapDiv = ref(null);
+
 onMounted(async () => {
   await loader.load();
   const map = new google.maps.Map(mapDiv.value, {
     center: currPos.value,
     zoom: 18,
   });
-  const image =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+  const image = "https://cdn-icons-png.flaticon.com/128/490/490091.png";
   const beachMarker = new google.maps.Marker({
     position: {
       lat: coords.value.latitude,
@@ -35,15 +35,34 @@ onMounted(async () => {
     },
     map,
     icon: image,
-  })
-  let marker1 = new google.maps.Marker({
-    position:{
-      lat: 42.87666667,
-      lng:  -8.54722222
-    },
-    map,
-    icon: image
-  })
+  });
+
+
+
+
+
+  // let marker1 = new google.maps.Marker({
+  //   position: {
+  //     lat: 42.87666667,
+  //     lng: -8.54722222,
+  //   },
+  //   map,
+  //   icon: image,
+  // });
+
+  // let marker2 = new google.maps.Marker({
+  //   position: {
+  //     lat: 42.87769526684854,
+  //     lng: -8.550479970844851,
+  //   },
+  //   map,
+  //   icon: image,
+  // });
+
+
+
+   
+
   // const marka1 = new google.maps.Marker({
   //   position: {
   //     lat: arbol1.value.latitude,
@@ -53,6 +72,30 @@ onMounted(async () => {
   //   icon: image,
   // });
 });
+
+//  fetch('./ghfhf.json')
+//   .then( data => {
+//     console.log(data.altura)
+//   })
+
+  const arboles = async () =>{
+   try {
+    const respuesta = await fetch('https://altas-senlleiras-default-rtdb.europe-west1.firebasedatabase.app/')
+    const data = await respuesta.json()
+
+    const dataForeach = data.forEach(element => {
+      console.log(element.location)
+    });
+
+    console.log(data)
+
+   } catch (error) {
+     console.log('HAY UN ERROR AQUI', error)
+   }
+  }
+
+
+arboles()
 
 // This example adds a marker to indicate the position of Bondi Beach in Sydney,
 // Australia.
