@@ -20,13 +20,18 @@ let dataArray = reactive([]);
 const arboles = async () => {
   try {
     const respuesta = await fetch(
-      "https://altas-senlleiras-default-rtdb.europe-west1.firebasedatabase.app/senlleiras.json"
+      "https://altas-senlleiras-default-rtdb.europe-west1.firebasedatabase.app/senlleiras.json",
+      {
+        method: 'GET',
+        'Content-Type': 'application/json',
+        'API-Key': GOOGLE_MAPS_API_KEY
+      }
     );
     const data = await respuesta.json();
     for (let propiedad in data) {
       dataArray.push(data[propiedad]);
     }
-    console.log(data);
+    //console.log(data);
   } catch (error) {
     console.log("HAY UN ERROR AQUI", error);
   }
@@ -40,9 +45,11 @@ const currPos = computed(() => ({
 
 //Cargamos la APIKEY
 const loader = new Loader({ apiKey: GOOGLE_MAPS_API_KEY });
+
 //Hacemos el mapa reactivo.
 const mapDiv = ref(null);
 
+//Montamos el mapa
 onMounted(async () => {
   await arboles();
   await loader.load();
@@ -50,18 +57,39 @@ onMounted(async () => {
     center: currPos.value,
     zoom: 18,
   });
+  //Icono(marca) que pintamos en el mapa
   const image = "https://cdn-icons-png.flaticon.com/128/490/490091.png";
-
+  //Creamos un marcador (Icono arbol)
+  const marker = () =>{
   //Recorremos las propiedades de dataArray y pintamos la marca
+  let eventos = [];
   for (let item of dataArray) {
-    new google.maps.Marker({
+    eventos.push(new google.maps.Marker({
       position: {
-        lat: item.location.latitude,
-        lng: item.location.longitude,
+        lat: Number(item.location.latitude),
+        lng: Number(item.location.longitude),
       },
       map,
       icon: image,
-    });
+    }));  
   }
+  for(let evento of eventos){
+    evento.addListener("click", (e) => {
+      alert()
+    
+    
+
+    });
+    
+
+  }
+  console.log(dataArray[0])
+  }  
+//Llamamos al marcador
+marker()
+  
 });
+
+
+
 </script>
