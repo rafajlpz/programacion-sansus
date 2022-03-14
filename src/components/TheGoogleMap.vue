@@ -1,132 +1,67 @@
 <template>
-  <!-- {{ coords }} -->
+  <!-- Pintamos el mapa y le damos estilo(ajuste) -->
   <div ref="mapDiv" style="width: 100%; height: 80vh"></div>
 </template>
 
 <script setup>
-//Dependencias
-import { computed, ref, onMounted, inject } from "vue";
+//Importaciones
+import { computed, ref, onMounted, inject, reactive } from "vue";
+//Importamos la libreria de googlemaps instalada previamente con npm install.
 import { Loader } from "@googlemaps/js-api-loader";
 
-//Constante
+//APIKEY creada en la cuenta de google.
 const GOOGLE_MAPS_API_KEY = "AIzaSyDgpFxA83lfCwyjEn0o1g2Dw-OlLZPqHEE";
+//Inyectamos las las coordenadas de useGeolocation.js
 const coords = inject("coords");
 
-//const coords = ref({ latitude: 42.87756680296138, longitude: -8.550073735931141 });
+//Hacemos reactivo el el array de objetos.
+let dataArray = reactive([]);
+//Enlazamos la BBDD de firebase para pintar las propiedades en data y si hay algun error.
+const arboles = async () => {
+  try {
+    const respuesta = await fetch(
+      "https://altas-senlleiras-default-rtdb.europe-west1.firebasedatabase.app/senlleiras.json"
+    );
+    const data = await respuesta.json();
+    for (let propiedad in data) {
+      dataArray.push(data[propiedad]);
+    }
+    console.log(data);
+  } catch (error) {
+    console.log("HAY UN ERROR AQUI", error);
+  }
+};
+
+//Posicion inicio-central del mapa.
 const currPos = computed(() => ({
-  lat: coords.value.latitude,
-  lng: coords.value.longitude,
+  lat: 42.8804,
+  lng: -8.5463,
 }));
 
+//Cargamos la APIKEY
 const loader = new Loader({ apiKey: GOOGLE_MAPS_API_KEY });
+//Hacemos el mapa reactivo.
 const mapDiv = ref(null);
 
 onMounted(async () => {
+  await arboles();
   await loader.load();
   const map = new google.maps.Map(mapDiv.value, {
     center: currPos.value,
     zoom: 18,
   });
   const image = "https://cdn-icons-png.flaticon.com/128/490/490091.png";
-  const beachMarker = new google.maps.Marker({
-    position: {
-      lat: coords.value.latitude,
-      lng: coords.value.longitude,
-    },
-    map,
-    icon: image,
-  });
 
-
-
-
-
-  // let marker1 = new google.maps.Marker({
-  //   position: {
-  //     lat: 42.87666667,
-  //     lng: -8.54722222,
-  //   },
-  //   map,
-  //   icon: image,
-  // });
-
-  // let marker2 = new google.maps.Marker({
-  //   position: {
-  //     lat: 42.87769526684854,
-  //     lng: -8.550479970844851,
-  //   },
-  //   map,
-  //   icon: image,
-  // });
-
-
-
-   
-
-  // const marka1 = new google.maps.Marker({
-  //   position: {
-  //     lat: arbol1.value.latitude,
-  //     lng: arbol1.value.longitude,
-  //   },
-  //   map,
-  //   icon: image,
-  // });
-});
-
-//  fetch('./ghfhf.json')
-//   .then( data => {
-//     console.log(data.altura)
-//   })
-
-  const arboles = async () =>{
-   try {
-    const respuesta = await fetch('https://altas-senlleiras-default-rtdb.europe-west1.firebasedatabase.app/')
-    const data = await respuesta.json()
-
-    const dataForeach = data.forEach(element => {
-      console.log(element.location)
+  //Recorremos las propiedades de dataArray y pintamos la marca
+  for (let item of dataArray) {
+    new google.maps.Marker({
+      position: {
+        lat: item.location.latitude,
+        lng: item.location.longitude,
+      },
+      map,
+      icon: image,
     });
-
-    console.log(data)
-
-   } catch (error) {
-     console.log('HAY UN ERROR AQUI', error)
-   }
   }
-
-
-arboles()
-
-// This example adds a marker to indicate the position of Bondi Beach in Sydney,
-// Australia.
-
-// function initMap() {
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 4,
-//     center: { lat: -33, lng: 151 },
-//   });
-//   const image =
-//     "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-//   const beachMarker = new google.maps.Marker({
-//     position: { lat: -33.89, lng: 151.274 },
-//     map,
-//     icon: image,
-//   });
-// }
-
-// const initMap = ()=> {
-//   const arbol1 = { lat: -25.363, lng: 131.044 };
-//   const map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 4,
-//     center: arbol1,
-//   });
-
-//   new google.maps.Marker({
-//     position: arbol1,
-//     map,
-//     title: "Hello World!",
-//   });
-// }
-
-// initMap()
+});
 </script>
